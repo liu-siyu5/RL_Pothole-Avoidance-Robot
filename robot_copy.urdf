@@ -1,0 +1,216 @@
+<robot name="test_robot">
+    <!-- Robot base -->
+    <link name="base_link">
+        <visual>
+            <geometry>
+                <box size="0.04 0.06 0.03"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0 0.015"/>
+            <material name="white">
+                <color rgba="1 1 1 1"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.04 0.06 0.03"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0 0.015"/>
+        </collision>
+        <inertial>
+            <origin rpy="0 0 0" xyz="0 0 0.015"/>
+            <mass value="0.100"/>
+            <inertia ixx="0.00142" ixy="0" ixz="0" iyy="0.00040" iyz="0" izz="0.0008"/>
+        </inertial>
+    </link>
+    
+    <!-- Left wheel -->
+    <link name="lwheel">
+        <visual>
+            <geometry>
+                <cylinder length="0.01" radius="0.01375"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <material name="black">
+                <color rgba="0 0 0 1"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder length="0.01" radius="0.01375"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+        </collision>
+        <inertial>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <mass value="0.003"/>
+            <inertia ixx="0.00000016" ixy="0" ixz="0" iyy="0.00000017" iyz="0" izz="0.00000016"/>
+        </inertial>
+    </link>
+    
+    <!-- Left wheel joint -->
+    <joint name="base_to_lwheel" type="continuous">
+        <parent link="base_link"/>
+        <child link="lwheel"/>
+        <origin xyz="0 0.035 0.005" rpy="-1.5708 0 0"/>
+        <axis xyz="0 0 1"/>
+        <dynamics damping="0.0" friction="0.0"/>
+    </joint>
+    
+    <!-- Right wheel -->
+    <link name="rwheel">
+        <visual>
+            <geometry>
+                <cylinder length="0.01" radius="0.01375"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <material name="black">
+                <color rgba="0 0 0 1"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder length="0.01" radius="0.01375"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+        </collision>
+        <inertial>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <mass value="0.003"/>
+            <inertia ixx="0.00000016" ixy="0" ixz="0" iyy="0.00000017" iyz="0" izz="0.00000016"/>
+        </inertial>
+    </link>
+    
+    <!-- Right wheel joint -->
+    <joint name="base_to_rwheel" type="continuous">
+        <parent link="base_link"/>
+        <child link="rwheel"/>
+        <origin xyz="0 -0.035 0.005" rpy="-1.5708 0 0"/>
+        <axis xyz="0 0 1"/>
+        <dynamics damping="0.0" friction="0.0"/>
+    </joint>
+    
+    <!-- Front wheel holder -->
+    <link name="fwheel_attach">
+        <visual>
+            <geometry>
+                <cylinder length="0.015" radius="0.006"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="-0.03 0 0.01"/>
+            <material name="white">
+                <color rgba="1 1 1 1"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder length="0.015" radius="0.006"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="-0.03 0 0.02"/>
+        </collision>
+        <inertial>
+            <mass value="0.003"/>
+            <inertia ixx="0.000001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000001"/>
+        </inertial>
+    </link>
+    
+    <!-- Front wheel holder connection -->
+    <joint name="base_to_fattach" type="fixed">
+        <parent link="base_link"/>
+        <child link="fwheel_attach"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+    
+    <!-- Front wheel -->
+    <link name="fwheel">
+        <visual>
+            <geometry>
+                <sphere radius="0.005"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <material name="black">
+                <color rgba="0 0 0 1"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder length="0.002" radius="0.005"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+        </collision>
+        <inertial>
+            <mass value="0.028"/>
+            <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.00001" iyz="0" izz="0.00001"/>
+        </inertial>
+    </link>
+    
+    <!-- Front wheel connection-->
+    <joint name="base_to_fwheel" type="fixed">
+        <parent link="base_link"/>
+        <child link="fwheel"/>
+        <origin xyz="-0.03 0 -0.00375" rpy="1.5708 0 0"/>
+        <axis xyz="0 1 0"/>
+        <dynamics damping="0.0" friction="0.0"/>
+    </joint>
+    
+    <!-- Scanner -->
+    <link name="scanner">
+        <visual>
+            <geometry>
+                <box size="0.01 0.02 0.01"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0.015 0 0.005"/>
+            <material name="black">
+                <color rgba="0 0 0 1"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.01 0.02 0.01"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0.015 0 0.005"/>
+        </collision>
+        <inertial>
+            <origin rpy="0 0 0" xyz="0.015 0 0.005"/>
+            <mass value="0.0015"/>
+            <inertia ixx="0.000001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000001"/>
+        </inertial>
+    </link>
+    
+    <!-- Scanner connection -->
+    <joint name="base_to_scanner" type="fixed">
+        <parent link="base_link"/>
+        <child link="scanner"/>
+        <origin xyz="0.05 0 0.085" rpy="0 1.578 0"/>
+    </joint>
+    
+    <!-- IMU at the top of the box -->
+    <link name="imu">
+        <visual>
+            <geometry>
+                <box size="0.01 0.01 0.005"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <material name="blue">
+                <color rgba="0 0 1 1"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.01 0.01 0.005"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+        </collision>
+        <inertial>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <mass value="0.002"/>
+            <inertia ixx="0.0000001" ixy="0" ixz="0" iyy="0.0000001" iyz="0" izz="0.0000001"/>
+        </inertial>
+    </link>
+    
+    <!-- IMU connection -->
+    <joint name="base_to_imu" type="fixed">
+        <parent link="base_link"/>
+        <child link="imu"/>
+        <origin xyz="0 0 0.035" rpy="0 0 0"/>
+    </joint>
+    
+</robot>
